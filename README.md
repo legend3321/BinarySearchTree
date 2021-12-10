@@ -207,7 +207,7 @@ break;
 In c we have system heders for eg. `<stdio.h>, <stdlib.h>, <string.h>`etc which are part of 'c' language.
 <br />
 But we have an option to have custom headers in which we can have our own functions for preforming tasks as per our need. 
->User defined headers are called as `#include "<header_path>.h"`. But consider you should have a seprate file for the (.h)header available at that location specified by you itherwise it wil show error while compilig.
+>User defined headers are called as `#include "<header_path>.h"`. But consider you should have a seprate file for the (.h)header available at that location specified by you otherwise it wil show error while compilig.
 
 In out case we have called our header file at last of the code as all the fuctions should be placed at last. Otherwise, scope will get disturbed if called with other header files(I mean at top :: Don't do that, call the file where it is needed).
 ```c
