@@ -86,7 +86,7 @@ Where i is for the last index of arrat root, choice if for user input choices ac
 <br />
 Now We have an array of type bst(because it will contain roots of different trees. And `*root[MAX]` is written because we will not directly put the roots in array, rather we will pit address of the roots. So basically they are pointers). node is created for new nodes and passing it to ```Insert()``` function for the further addition of nodes in tree.
 
-#### ```Menu();```
+#### Menu()
 Now we will call the `Menu()` function which is declared above and defined in `"functions.h"` header file.
 <br />
 ```c
@@ -138,4 +138,77 @@ case 1:
   break;
 ```
 
+#### case 2:
+SelectTree() will accept index of tree user want to work on and pass that to `sRoot` variable in  main() which is a refrence of selected root in `*root` array.
+```c
+sRoot = SelectTree(root, i);
+printf("Tree Selected With Info : %d\n", root[sRoot]->info);
+break;
+```
 
+#### case 3:
+Now pay attention to `node = (bst *)malloc(sizeof(bst));` in this we are using malloc() function of `stdlib.h` of c
+>malloc() function is used to allocate memory to aur variable in Computer's memory(generally RAM), it accepts only one parameter which is size of variable we want to allicate memory(eg. for int it is 4bit and for char it is 1 bit), and retrns void address which can point any type of data, which we will convert it into desired data-type.
+
+In this case malloc is allocationg memory equivalent to size of `bst` and return void address which we are convertiong it to strurt BSt type by using explicit type-casting `(bst *)`.
+```c
+node = (bst *)malloc(sizeof(bst));
+
+printf("Enter Info For New Node : ");
+scanf("%d", &info);
+
+node->info = info;
+node->left = NULL;
+node->right = NULL;
+Insert(root[sRoot], node);
+
+break;
+```
+
+
+After allocationg memory to our new node we will put `info` in it and `NULL` to both the left anf right pointers. And then Pass to `Insert` function for plaacement of new node at right place in tree.
+
+#### case 4:
+In this tree is travsversed in preorder manner. 
+```c
+printf("PreOrder(NLR) : \n");
+PreOrder(root[sRoot]);
+printf("\n");
+
+break;
+```
+#### case 5:
+In this tree is travsversed in inorder manner. 
+```c
+printf("InOrder(LNR) : \n");
+InOrder(root[sRoot]);
+printf("\n");
+
+break;
+```
+#case 6:
+In this tree is travsversed in postorder manner. 
+```c
+printf("PostOrder(LRN) : \n");
+PostOrder(root[sRoot]);
+printf("\n");
+
+break;
+```
+
+#case 9:
+Menu function is called again on choice = 9
+```c
+Menu();
+break;
+```
+
+## functions.h
+In c we have system heders for eg. `<stdio.h>, <stdlib.h>, <string.h>`etc which are part of 'c' language.
+<br />
+But we have an option to have custom headers in which we can have our own functions for preforming tasks as per our need. 
+>User defined headers are called as `#include "<header_path>.h"`. But consider you should have a seprate file for the (.h)header available at that location specified by you itherwise it wil show error while compilig.
+In out case we have called our header file at last of the code as all the fuctions should be placed at last. Otherwise, scope will get disturbed if called with other header files(I mean at top :: Don't do that, call the file where it is needed).
+```c
+#include "functions.h"
+```
