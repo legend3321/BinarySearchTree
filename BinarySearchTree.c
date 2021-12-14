@@ -4,7 +4,7 @@
 
 typedef struct BST
 {
-    int info;
+    float info;
     struct BST *left;
     struct BST *right;
 } bst;
@@ -17,11 +17,14 @@ void PreOrder(bst *);
 void InOrder(bst *);
 void PostOrder(bst *);
 void Search(bst *, int);
+void CountNodes(bst *, int *);
+void CountLeaf(bst *, int *);
 
 int main()
 {
-    int i = -1, choice = 1, info, sRoot = i;
-    bst *root[MAX], *node = NULL, *temp = NULL;
+    int i = -1, choice = 1, sRoot = i, counter = 0;
+    bst *root[MAX], *node = NULL;
+    float info;
 
     Menu();
 
@@ -38,20 +41,22 @@ int main()
             {
                 i++;
                 root[i] = Root();
+                sRoot = i;
+                printf("Tree Selected With Info : %f\n", root[sRoot]->info);
             }
 
             break;
 
         case 2:
             sRoot = SelectTree(root, i);
-            printf("Tree Selected With Info : %d\n", root[sRoot]->info);
+            printf("Tree Selected With Info : %f\n", root[sRoot]->info);
             break;
 
         case 3:
             node = (bst *)malloc(sizeof(bst));
 
             printf("Enter Info For New Node : ");
-            scanf("%d", &info);
+            scanf("%f", &info);
 
             node->info = info;
             node->left = NULL;
@@ -83,12 +88,26 @@ int main()
 
         case 7:
             printf("Enter Value to Search : ");
-            scanf("%d", &info);
+            scanf("%f", &info);
             Search(root[sRoot], info);
 
             break;
 
+        case 8:
+            counter = 0;
+            CountNodes(root[sRoot], &counter);
+            printf("%f Nodes Are present in Tree\n", counter);
+
+            break;
+
         case 9:
+            counter = 0;
+            CountLeaf(root[sRoot], &counter);
+            printf("%f Leaf Are present in Tree\n", counter);
+
+            break;
+
+        case 10:
             Menu();
             break;
         }

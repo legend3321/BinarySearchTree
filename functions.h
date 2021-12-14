@@ -9,8 +9,10 @@ void Menu()
     printf("5>InOrder(LNR)\n");
     printf("6>PostOrder(LRN)\n");
     printf("7>Search\n");
+    printf("8>Count Nodes\n");
+    printf("9>Count Leaves\n");
 
-    printf("9>Print Menu\n");
+    printf("10>Print Menu\n");
     printf("0>Exit\n");
     printf("\n----------------------\n");
 }
@@ -36,10 +38,11 @@ bst *Root()
     bst *temp;
     temp = (bst *)malloc(sizeof(bst));
 
-    int info;
+    float info;
 
     printf("Enter New Root : ");
-    scanf("%d", &info);
+    scanf("%f", &info);
+    printf("%f\n", info);
 
     temp->info = info;
     temp->left = NULL;
@@ -57,27 +60,26 @@ void Insert(bst *root, bst *node)
     }
     else
     {
-        bst *temp = root;
 
-        if (temp->info > node->info)
+        if (root->info > node->info)
         {
-            if (temp->left == NULL)
+            if (root->left == NULL)
             {
-                temp->left = node;
+                root->left = node;
                 return;
             }
             else
-                Insert(temp->left, node);
+                Insert(root->left, node);
         }
-        if (temp->info < node->info)
+        if (root->info < node->info)
         {
-            if (temp->right == NULL)
+            if (root->right == NULL)
             {
-                temp->right = node;
+                root->right = node;
                 return;
             }
             else
-                Insert(temp->right, node);
+                Insert(root->right, node);
         }
     }
 }
@@ -87,7 +89,7 @@ void PreOrder(bst *root)
     if (root == NULL)
         return;
 
-    printf("%d ,", root->info);
+    printf("%f ,", root->info);
 
     PreOrder(root->left);
 
@@ -101,7 +103,7 @@ void InOrder(bst *root)
 
     InOrder(root->left);
 
-    printf("%d ,", root->info);
+    printf("%f ,", root->info);
 
     InOrder(root->right);
 }
@@ -115,7 +117,7 @@ void PostOrder(bst *root)
 
     PostOrder(root->right);
 
-    printf("%d ,", root->info);
+    printf("%f ,", root->info);
 }
 
 void Search(bst *root, int info)
@@ -138,5 +140,30 @@ void Search(bst *root, int info)
             Search(root->right, info);
         else
             printf("Element Is Not present in Tree \n");
+    }
+}
+
+void CountNodes(bst *root, int *counter)
+{
+    if (root != NULL)
+    {
+        *counter += 1;
+
+        CountNodes(root->left, counter);
+
+        CountNodes(root->right, counter);
+    }
+}
+
+void CountLeaf(bst *root, int *counter)
+{
+    if (root != NULL)
+    {
+        if (root->left == NULL && root->right == NULL)
+            *counter += 1;
+
+        CountLeaf(root->left, counter);
+
+        CountLeaf(root->right, counter);
     }
 }
