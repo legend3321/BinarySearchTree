@@ -186,7 +186,7 @@ printf("\n");
 
 break;
 ```
-#case 6:
+#### case 6:
 In this tree is travsversed in postorder manner. 
 ```c
 printf("PostOrder(LRN) : \n");
@@ -196,7 +196,7 @@ printf("\n");
 break;
 ```
 
-#case 9:
+#### case 9:
 Menu function is called again on choice = 9
 ```c
 Menu();
